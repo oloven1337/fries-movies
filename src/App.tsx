@@ -1,7 +1,7 @@
 import React from 'react'
 
-export const App = () => {
-    return (
-        <h1>Бонжур жи есть</h1>
-    )
-}
+import {Main} from './pages/Main/Main'
+
+export const App = () => (
+    <Main/>
+)
