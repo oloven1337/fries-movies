@@ -1,12 +1,24 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
-export const Header = () => {
+import {HeaderStyled} from './style'
+
+import icon from './icon.png'
+
+export const Header: React.FC = () => {
     return (
-        <header>
+        <HeaderStyled>
             <ul>
-                <li>icon</li>
-                <li>contacts</li>
+                <Link to="/">
+                    <li>
+                        <img src={icon} alt="Фильмы"/>
+                        <span>Бонжур 😁</span>
+                    </li>
+                </Link>
+                <Link to="/">
+                    <li>contacts</li>
+                </Link>
             </ul>
-        </header>
+        </HeaderStyled>
     )
 }
