@@ -6,6 +6,8 @@ import {fetchFilms} from '../../__data__/filmsSlice'
 import {filmsSelector, isFetchingSelector} from '../../__data__/selectors/film'
 import {CardStyled, FormStyled} from './style'
 import {Link} from 'react-router-dom'
+import {CarouselFilms} from './Carousel/Carousel'
+import {Button} from '../../components/Button/Button'
 
 export const Main: React.FC = () => {
     const [text, setText] = React.useState('')
@@ -29,9 +31,10 @@ export const Main: React.FC = () => {
             <Header/>
             <main>
                 <FormStyled>
-                    <input onChange={handleChange} value={text} type="text"/>
-                    <button type="submit" onClick={submitHandler}>Искать</button>
+                    <input onChange={handleChange} value={text} type="text" placeholder="Поиск"/>
+                    <Button type="submit" onClick={submitHandler}>Искать</Button>
                 </FormStyled>
+
                 {loader ? <h2>Loading...</h2> : (
                     <CardStyled>
                         {films?.map((film) => (
@@ -45,6 +48,7 @@ export const Main: React.FC = () => {
                     </CardStyled>
                 )}
             </main>
+            <CarouselFilms/>
         </>
     )
 }
