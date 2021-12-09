@@ -3,21 +3,26 @@ import {Link} from 'react-router-dom'
 
 import {HeaderStyled} from './style'
 
-import icon from './icon.png'
+import icon from './netflix.png'
+import {Button} from '../Button/Button'
 
-export const Header: React.FC = () => {
+interface Props {
+    toggleTheme: () => void
+}
+
+export const Header: React.FC<Props> = ({toggleTheme}) => {
     return (
         <HeaderStyled>
             <ul>
-                <Link to="/">
-                    <li>
+                <li>
+                    <Link to="/">
                         <img src={icon} alt="Фильмы"/>
                         <span>Бонжур 😁</span>
-                    </li>
-                </Link>
-                <Link to="/">
-                    <li>contacts</li>
-                </Link>
+                    </Link>
+                </li>
+                <li>
+                    <Button clickHandler={toggleTheme}>Сменить тему</Button>
+                </li>
             </ul>
         </HeaderStyled>
     )

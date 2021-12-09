@@ -1,15 +1,24 @@
 import styled from 'styled-components'
 
-const greyColor = '#839BB1'
+export const MainStyled = styled.main`
+`
 
-export const CardStyled = styled.div`
+interface Props {
+    genre?: boolean
+}
+
+export const CardStyled = styled.div<Props>`
   display: flex;
   margin: 0 auto;
   text-align: center;
+  justify-content: center;
+  flex-wrap: ${props => props.genre ? 'no-wrap' : 'wrap'};
+  overflow-x: auto;
 
   div {
     margin: 10px;
     cursor: pointer;
+    text-align: center;
   }
 
   img {
@@ -28,29 +37,36 @@ export const CardStyled = styled.div`
     margin: 0;
     text-align: center;
     text-transform: capitalize;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
+
 
   @media (max-width: 768px) {
     display: block;
     margin: 0 50px;
   }
-
 `
 
 export const FormStyled = styled.form`
   display: flex;
   width: 100%;
   margin: 10px 0;
+  align-items: center;
 
   input {
     width: 250px;
     padding: 10px;
     margin-right: 10px;
     border-radius: 10px;
-    border: 1px solid ${greyColor};
+    border: 1px solid ${props => props.theme.color};
+    transition: .2s;
 
     &:focus {
-      box-shadow: 4px 4px 4px 4px rgba(246, 40, 40, 0.2);
+      outline: 1px solid rgba(255, 0, 0, 0.29);
+      box-shadow: 0 0 0 10px rgba(246, 40, 40, 0.2);
     }
   }
 `

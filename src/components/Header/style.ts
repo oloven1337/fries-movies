@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 
-const greyColor = '#839BB1'
-
 export const HeaderStyled = styled.header`
   img {
     width: 50px;
@@ -20,7 +18,12 @@ export const HeaderStyled = styled.header`
       display: flex;
       align-items: center;
       justify-content: space-between;
-      color: ${greyColor};
+      width: 200px;
+
+      a {
+        text-decoration: none;
+        color: ${props => props.theme.color};
+      }
 
       span {
         margin-left: 10px;
@@ -28,7 +31,5 @@ export const HeaderStyled = styled.header`
     }
   }
 
-  a {
-    text-decoration: none;
-  }
+
 `
