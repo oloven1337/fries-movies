@@ -10,9 +10,15 @@ export interface IFilm {
     }
 }
 
+interface Genre {
+    title: string,
+    data: IFilm[]
+}
+
 interface IState {
     films: IFilm[]
     chooseMovie: IFilm,
+    genres: Genre[],
     isFetching: boolean,
     isError: boolean
 }
@@ -27,12 +33,17 @@ const initialState: IState = {
             poster: ''
         }
     },
+    genres: [],
     isFetching: false,
     isError: false
 }
 
 interface ISearchType {
     titleMovie: string
+}
+
+interface IGenresType {
+    genre: string
 }
 
 interface IFetchFilmById {
@@ -60,6 +71,18 @@ export const fetchFilms = createAsyncThunk(
             return data
         } catch (err) {
             console.log('error', err)
+        }
+    }
+)
+
+export const fetchByGenres = createAsyncThunk(
+    'films/fetchByGenres',
+    async ({genre}: IGenresType) => {
+        try {
+            const {data} = await axios.get(`https://bazon.cc/api/json?token=545a8acbd841e88fb58b92f71d6e8b17&type=film&page=1&cat=${genre}`)
+            return {data, genre}
+        } catch (error) {
+            console.log(error)
         }
     }
 )
@@ -94,6 +117,20 @@ export const filmsSlice = createSlice({
             state.chooseMovie = action.payload.results[0]
         })
         builder.addCase(fetchFilmById.rejected, (state: IState) => {
+            state.isFetching = false
+            state.isError = false
+        })
+        builder.addCase(fetchByGenres.pending, (state: IState) => {
+            state.isError = false
+            state.isFetching = true
+        })
+        builder.addCase(fetchByGenres.fulfilled, (state: IState, action: PayloadAction<any>) => {
+            state.isFetching = false
+            // state.genres = action.payload.results
+            console.log(action.payload)
+            state.genres?.push({title: action.payload?.genre, data: action.payload.data.results})
+        })
+        builder.addCase(fetchByGenres.rejected, (state: IState) => {
             state.isFetching = false
             state.isError = false
         })

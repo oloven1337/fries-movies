@@ -17,14 +17,20 @@ export const CarouselStyled = styled(Carousel)`
 
 export const CarouselItemStyled = styled.div<Props>`
   background: ${props => `url(./${props.photo})`} center/cover;
+  background-size: 100%;
   border-radius: 16px;
   height: 300px;
   text-align: center;
   position: relative;
+  transition: background 0.2s;
+
+  &:hover {
+    background-size: 110%;
+  }
 
   button {
-    font-size: 10px;
     position: absolute;
+    font-size: 10px;
     bottom: 10px;
     right: 10px;
   }
