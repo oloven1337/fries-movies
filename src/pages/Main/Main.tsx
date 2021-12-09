@@ -2,12 +2,12 @@ import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
 import {fetchByGenres, fetchFilms} from '../../__data__/filmsSlice'
-import {filmsByGenresSelector, filmsSelector, isFetchingSelector} from '../../__data__/selectors/film'
-import {CardStyled, FormStyled, MainStyled} from './style'
 import {Link} from 'react-router-dom'
 import {CarouselFilms} from './Carousel/Carousel'
 import {Button} from '../../components/Button/Button'
-import {RootState} from "../../__data__/store";
+import {filmsByGenresSelector, filmsSelector, isFetchingSelector} from '../../__data__/selectors/film'
+
+import {CardStyled, FormStyled, MainStyled, TitleGenreStyled, TitleNameFilmStyled} from './style'
 
 export const Main: React.FC = () => {
     const [text, setText] = React.useState('')
@@ -58,15 +58,15 @@ export const Main: React.FC = () => {
                         ))}
                     </CardStyled>
                 )}
-                <h2>Аниме</h2>
-                {loader ? <h2>loading</h2> : (
+                <TitleGenreStyled>Аниме</TitleGenreStyled>
+                {loader && films?.length === 0 ? <h2>loading</h2> : (
                     <CardStyled genre>
                         {filmsByGenres?.map(genre => genre.data?.map(film =>
                                 <div key={film.link}>
                                     <Link key={film.kinopoisk_id} to={`/film/${film.kinopoisk_id}`}>
                                         <div>
                                             <img src={film.info.poster} alt="poster"/>
-                                            <h4>{film.info.rus}</h4>
+                                            <TitleNameFilmStyled>{film.info.rus}</TitleNameFilmStyled>
                                         </div>
                                     </Link>
                                 </div>
@@ -74,6 +74,7 @@ export const Main: React.FC = () => {
                         )}
                     </CardStyled>
                 )}
+                <h4>Будет дополняться (но это не точно)</h4>
             </MainStyled>
         </>
     )

@@ -6,7 +6,10 @@ export interface IFilm {
     kinopoisk_id: string,
     info: {
         rus: string,
-        poster: string
+        poster: string,
+        rating: {
+            vote_num_imdb: string
+        }
     }
 }
 
@@ -30,7 +33,10 @@ const initialState: IState = {
         kinopoisk_id: '',
         info: {
             rus: '',
-            poster: ''
+            poster: '',
+            rating: {
+                vote_num_imdb: ''
+            }
         }
     },
     genres: [],
@@ -127,8 +133,10 @@ export const filmsSlice = createSlice({
         builder.addCase(fetchByGenres.fulfilled, (state: IState, action: PayloadAction<any>) => {
             state.isFetching = false
             // state.genres = action.payload.results
-            console.log(action.payload)
             state.genres?.push({title: action.payload?.genre, data: action.payload.data.results})
+            state.genres.map(genre => genre.data.sort((a, b) =>
+                Number(b.info.rating.vote_num_imdb) - Number(a.info.rating.vote_num_imdb))
+            )
         })
         builder.addCase(fetchByGenres.rejected, (state: IState) => {
             state.isFetching = false

@@ -31,4 +31,8 @@ export const GlobalStyled = createGlobalStyle`
     background-color: ${props => props.theme.backgroundColor};
     transition: .5s;
   }
+  
+  h4 {
+    color: ${props => props.theme.color};
+  }
 `

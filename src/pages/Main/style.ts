@@ -41,11 +41,12 @@ export const CardStyled = styled.div<Props>`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: ${props => props.theme.color};
   }
 
 
   @media (max-width: 768px) {
-    display: block;
+    display: ${props => props.genre ? 'flex' : 'block'};
     margin: 0 50px;
   }
 `
@@ -66,7 +67,16 @@ export const FormStyled = styled.form`
 
     &:focus {
       outline: 1px solid rgba(255, 0, 0, 0.29);
-      box-shadow: 0 0 0 10px rgba(246, 40, 40, 0.2);
+      box-shadow: 0 0 0 5px rgba(246, 40, 40, 0.2);
     }
   }
+`
+
+export const TitleGenreStyled = styled.h2`
+  color: ${props => props.theme.color};
+  margin-bottom: 0;
+`
+
+export const TitleNameFilmStyled = styled.h4`
+  color: ${props => props.theme.color};
 `

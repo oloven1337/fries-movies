@@ -5,6 +5,8 @@ import {chooseMovieSelector} from '../../__data__/selectors/film'
 import {useParams} from 'react-router-dom'
 import {fetchFilmById} from '../../__data__/filmsSlice'
 
+import {WrapperStyled} from './style'
+
 export const Film: React.FC = () => {
     const {kinopoisk_id} = useParams()
     const dispatch = useDispatch()
@@ -15,9 +17,13 @@ export const Film: React.FC = () => {
     }, [kinopoisk_id, dispatch])
 
     return (
-        <>
-            <img src={info.poster} alt="poster"/>
-            <iframe allowFullScreen src={link} title="Films" />
-        </>
+        <WrapperStyled>
+            <div>
+                <img src={info.poster} alt="poster"/>
+            </div>
+            <div>
+                <iframe allowFullScreen src={link} title="Films"/>
+            </div>
+        </WrapperStyled>
     )
 }
