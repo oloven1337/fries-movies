@@ -35,4 +35,8 @@ export const GlobalStyled = createGlobalStyle`
   h4 {
     color: ${props => props.theme.color};
   }
+  
+  h2 {
+    color: ${props => props.theme.color};
+  }
 `

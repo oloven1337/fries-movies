@@ -58,23 +58,25 @@ export const Main: React.FC = () => {
                         ))}
                     </CardStyled>
                 )}
-                <TitleGenreStyled>Аниме</TitleGenreStyled>
-                {loader && films?.length === 0 ? <h2>loading</h2> : (
-                    <CardStyled genre>
-                        {filmsByGenres?.map(genre => genre.data?.map(film =>
-                                <div key={film.link}>
-                                    <Link key={film.kinopoisk_id} to={`/film/${film.kinopoisk_id}`}>
-                                        <div>
-                                            <img src={film.info.poster} alt="poster"/>
-                                            <TitleNameFilmStyled>{film.info.rus}</TitleNameFilmStyled>
-                                        </div>
-                                    </Link>
-                                </div>
-                            )
-                        )}
-                    </CardStyled>
-                )}
-                <h4>Будет дополняться (но это не точно)</h4>
+                <div>
+                    {films?.length !== 0 ? null : (
+                        <CardStyled genre>
+                            <TitleGenreStyled>Аниме</TitleGenreStyled>
+                            {filmsByGenres?.map(genre => genre.data?.map(film =>
+                                    <div key={film.link}>
+                                        <Link key={film.kinopoisk_id} to={`/film/${film.kinopoisk_id}`}>
+                                            <div>
+                                                <img src={film.info.poster} alt="poster"/>
+                                                <TitleNameFilmStyled>{film.info.rus}</TitleNameFilmStyled>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                )
+                            )}
+                            <h4>Будет дополняться (но это не точно)</h4>
+                        </CardStyled>
+                    )}
+                </div>
             </MainStyled>
         </>
     )
